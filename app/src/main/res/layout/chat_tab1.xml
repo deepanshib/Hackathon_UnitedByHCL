@@ -120,36 +120,38 @@
         android:layout_below="@+id/button3"
         android:layout_alignRight="@+id/ques2"
         android:layout_alignEnd="@+id/ques2" />
- <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     android:layout_below="@+id/ans2"
-     android:layout_alignParentRight="true"
-     android:layout_alignParentEnd="true"
-    android:layout_marginTop="50dp"
-     android:layout_marginLeft="20dp"
-    android:orientation="vertical"
-     >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ans2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hello"
-        android:id="@+id/latlong"/>
+        <TextView
+            android:id="@+id/latlong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hello" />
 
-     <TextView
-         android:id="@+id/address"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="address" />
-   <TextView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="distance"
-         android:id="@+id/distance"/>
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="address" />
 
- </LinearLayout>
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="distance" />
+
+    </LinearLayout>
 
  <!--</LinearLayout>-->
 </RelativeLayout>
