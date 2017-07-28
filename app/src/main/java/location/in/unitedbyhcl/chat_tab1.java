@@ -67,6 +67,8 @@ public class chat_tab1 extends Fragment implements LocationListener {
     TextView txtLat, geoadd,geodistance;
     String lat;
     String provider;
+    Geocoder geocoder;
+    List<Address> addresses;
     Double latitude, longitude,lat1 = -82.862751 ,lon1 = 135.0000;
     float distance = 0;
     protected boolean gps_enabled, network_enabled;
@@ -110,6 +112,8 @@ public class chat_tab1 extends Fragment implements LocationListener {
         b3=(Button)rootView.findViewById(R.id.button3);
         b4=(Button)rootView.findViewById(R.id.button4);
         img=rootView.findViewById(R.id.smiley);
+
+        geocoder = new Geocoder(getContext(), Locale.getDefault());
 
         //location</code>
         txtLat = (TextView) rootView.findViewById(R.id.latlong);
@@ -242,10 +246,9 @@ public void fetch_q() {
             //Check if the permission is granted or not.
             if (resultCode == RESULT_OK) {
                 //initializeView();
-                if(flagDisp)
-                {   getActivity().startService(new Intent(getActivity(),FloatingViewService.class));
-                    getActivity().finish();
-                }
+
+                  getActivity().startService(new Intent(getContext(),FloatingViewService.class));
+                  getActivity().finish();
 
             } else { //Permission is not available
                 Toast.makeText(getActivity(),
@@ -274,10 +277,10 @@ public void fetch_q() {
         // mDatabase.child("users").child("usercurrentlocation").setValue(latitude);
         txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
 
-        Geocoder geocoder;
-        List<Address> addresses;
 
-        geocoder = new Geocoder(getActivity(), Locale.getDefault());
+
+
+        //geocoder = new Geocoder(getContext(), Locale.getDefault());
 
         try {
             addresses = geocoder.getFromLocation(latitude, longitude, 1);
