@@ -49,7 +49,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class chat_tab1 extends Fragment implements LocationListener {
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
-    Boolean flagDisp;
+    Boolean flagDisp=false;
     TextView t1,t2,t3;
     ImageView img;
     Button b2,b3,b4;
@@ -140,7 +140,7 @@ public class chat_tab1 extends Fragment implements LocationListener {
 //                  //  getActivity().finish();
 //                }
 //            });
-           // if(flagDisp)
+            if(flagDisp)
             {
                 getActivity().startService(new Intent(getActivity(),FloatingViewService.class));
             }
@@ -239,19 +239,6 @@ public void fetch_q() {
         }
     });
 }
-    //call this function anywhere to get flag value in this fragment
-
-
-
-//    private void initializeView() {
-//        getView().findViewById(R.id.notify_me).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getActivity().startService(new Intent(getActivity(),FloatingViewService.class));
-//                getActivity().finish();
-//            }
-//        });
-//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -342,15 +329,13 @@ public void fetch_q() {
         distance = distFrom(lat1,lon1,latitude,longitude);
 
         if (distance >= 5000.00) {
-
-            // mUserLcationDatabaseReference.push().setValue(loc2);
-            //mDatabase.child("users").child("usercurrentlocation").child("latitude").setValue(latitude);
-            //mDatabase.child("users").child("usercurrentlocation").child("longitude").setValue(longitude);
+            flagDisp=true;
+            //push loc2 to firebase and update loc1 there
+            mDatabase.child("users").child("usercurrentlocation").child("latitude").setValue(latitude);
+            mDatabase.child("users").child("usercurrentlocation").child("longitude").setValue(longitude);
               //lat1 = latitude;
             //lon1 = longitude;
-            //temp.setText(latitude+""+longitude+"");
-
-            //push loc2 to firebase and update loc1 there
+            // The above two statements should b comment out for not setting your current location as present location else chathead servive will be disabled.
         }
 
 
