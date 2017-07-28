@@ -140,10 +140,10 @@ public class chat_tab1 extends Fragment implements LocationListener {
 //                  //  getActivity().finish();
 //                }
 //            });
-            if(flagDisp)
-            {
+          //  if(flagDisp)
+            //{
                 getActivity().startService(new Intent(getActivity(),FloatingViewService.class));
-            }
+            //}
         }
         mDatabase = FirebaseDatabase.getInstance().getReference("questions");
 

@@ -113,7 +113,7 @@ public class Layout1_CHAT extends Fragment  {
         mViewPager = (ViewPager) myview.findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        temp= (TextView) myview.findViewById(R.id.texttemp);
+
 
         TabLayout tabLayout = (TabLayout) myview.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);

@@ -130,7 +130,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="visible">
 
 
         <TextView
