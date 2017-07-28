@@ -49,7 +49,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class chat_tab1 extends Fragment implements LocationListener {
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
-    Boolean flagDisp=false;
+    //Boolean flagDisp=false;
     TextView t1,t2,t3;
     ImageView img;
     Button b2,b3,b4;
@@ -140,10 +140,10 @@ public class chat_tab1 extends Fragment implements LocationListener {
 //                  //  getActivity().finish();
 //                }
 //            });
-            if(flagDisp)
-            {
+            //if(flagDisp)
+            //{
                 getActivity().startService(new Intent(getActivity(),FloatingViewService.class));
-            }
+            //}
         }
         mDatabase = FirebaseDatabase.getInstance().getReference("questions");
 
@@ -278,10 +278,6 @@ public void fetch_q() {
         txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
 
 
-
-
-        //geocoder = new Geocoder(getContext(), Locale.getDefault());
-
         try {
             addresses = geocoder.getFromLocation(latitude, longitude, 1);
             int i = addresses.get(0).getMaxAddressLineIndex();
@@ -329,7 +325,7 @@ public void fetch_q() {
         distance = distFrom(lat1,lon1,latitude,longitude);
 
         if (distance >= 5000.00) {
-            flagDisp=true;
+            //flagDisp=true;
             //push loc2 to firebase and update loc1 there
             mDatabase.child("users").child("usercurrentlocation").child("latitude").setValue(latitude);
             mDatabase.child("users").child("usercurrentlocation").child("longitude").setValue(longitude);
