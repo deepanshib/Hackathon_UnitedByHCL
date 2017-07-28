@@ -49,7 +49,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class chat_tab1 extends Fragment implements LocationListener {
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
-    Boolean flagDisp=false;
+    //Boolean flagDisp=false;
     TextView t1,t2,t3;
     ImageView img;
     Button b2,b3,b4;
@@ -140,7 +140,7 @@ public class chat_tab1 extends Fragment implements LocationListener {
 //                  //  getActivity().finish();
 //                }
 //            });
-          //  if(flagDisp)
+            //if(flagDisp)
             //{
                 getActivity().startService(new Intent(getActivity(),FloatingViewService.class));
             //}
