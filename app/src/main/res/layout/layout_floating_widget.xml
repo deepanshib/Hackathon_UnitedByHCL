@@ -57,7 +57,7 @@
                 android:id="@+id/expanded_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/authui_colorAccent"
+                android:background="@color/colorPrimary"
                 android:visibility="visible"
                 android:orientation="horizontal"
                 android:padding="8dp">
@@ -123,8 +123,8 @@
                     </LinearLayout>
 
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="visible">
@@ -133,6 +133,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginBottom="20dp"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
                         app:srcCompat="@drawable/ic_close" />
@@ -141,13 +142,12 @@
                         android:id="@+id/open_button"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_alignBottom="@+id/frameLayout"
+                        android:layout_marginTop="50dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
 
                         app:srcCompat="@drawable/ic_open" />
-                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
 
         </RelativeLayout>

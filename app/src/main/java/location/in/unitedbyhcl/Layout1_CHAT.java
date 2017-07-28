@@ -59,19 +59,12 @@ import static android.app.Activity.RESULT_OK;
  * Created by AnshulGarg on 7/22/2017.
  */
 
-public class Layout1_CHAT extends Fragment implements LocationListener {
+public class Layout1_CHAT extends Fragment  {
     View myview;
 
 
-    protected LocationManager locationManager;
-    protected LocationListener locationListener;
-    protected Context context;
-    TextView txtLat, geoadd,geodistance;
-    String lat;
-    String provider;
-    Double latitude, longitude,lat1 = -82.862751 ,lon1 = 135.0000;
-    float distance = 0;
-    protected boolean gps_enabled, network_enabled;
+
+
 
 
     private static final String TAG = "MainActivity";
@@ -101,18 +94,6 @@ public class Layout1_CHAT extends Fragment implements LocationListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 
 
     }
@@ -122,9 +103,7 @@ public class Layout1_CHAT extends Fragment implements LocationListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myview = inflater.inflate(R.layout.chat_layout1, container, false);
 
-        txtLat = (TextView) myview.findViewById(R.id.latlong);
-        geoadd = (TextView) myview.findViewById(R.id.address);
-        geodistance = (TextView) myview.findViewById(R.id.distance) ;
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mFirebaseStorage=FirebaseStorage.getInstance();
@@ -212,107 +191,6 @@ public class Layout1_CHAT extends Fragment implements LocationListener {
             }
             return null;
         }
-    }
-
-
-    @Override
-    public void onLocationChanged(Location location) {
-        txtLat = (TextView) myview.findViewById(R.id.latlong);
-        geoadd = (TextView) myview.findViewById(R.id.address);
-        geodistance = (TextView) myview.findViewById(R.id.distance);
-
-
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
-       // mDatabase.child("users").child("usercurrentlocation").setValue(latitude);
-        txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
-
-        Geocoder geocoder;
-        List<Address> addresses;
-
-        geocoder = new Geocoder(getActivity(), Locale.getDefault());
-
-        try {
-            addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            int i = addresses.get(0).getMaxAddressLineIndex();
-            String full_add[] = new String[i];
-            for (int j = 0; j < i; j++) {
-                full_add[j] = addresses.get(0).getAddressLine(j);
-            }
-            geoadd.setText(Arrays.toString(full_add).replaceAll("\\[|\\]", ""));
-            aboveTenkms();
-            String str2 = Float.toString(distance);
-            geodistance.setText("Distance :"+str2);
-            sharedata();
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        Log.d("Latitude", "status");
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-        Log.d("Latitude", "enable");
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-        Log.d("Latitude", "disable");
-    }
-
-    //code to send latitude and longitude to firebase only if distance between current latitude and longitde
-    //and the old one fetched from database is more than 10kms....Loc1 to be fetched from db
-    //code to convert latitude and longitude into the distance..........
-    //begins here.
-    public void aboveTenkms() {
-        flag = false;
-        distance = distFrom(lat1,lon1,latitude,longitude);
-
-        if (distance >= 5000.00) {
-            flag = true;
-           // mUserLcationDatabaseReference.push().setValue(loc2);
-            mDatabase.child("users").child("usercurrentlocation").child("latitude").setValue(latitude);
-            mDatabase.child("users").child("usercurrentlocation").child("longitude").setValue(longitude);
-//            lat1 = latitude;
-//            lon1 = longitude;
-            //temp.setText(latitude+""+longitude+"");
-
-            //push loc2 to firebase and update loc1 there
-        }
-
-
-    }
-
-
-    public float distFrom(double lat1, double lng1, double lat2, double lng2) {
-        double earthRadius = 6371000; //meters
-        double dLat = Math.toRadians(lat2-lat1);
-        double dLng = Math.toRadians(lng2-lng1);
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-                        Math.sin(dLng/2) * Math.sin(dLng/2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        float dist = (float) (earthRadius * c);
-
-        return dist;
-    }
-
-    //function to set shared preference (flag value only)
-    public void sharedata(){
-
-        SharedPreferences pref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = pref.edit();
-        edit.putBoolean("flagValue",flag);
-        edit.commit();
     }
 
 
